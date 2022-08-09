@@ -1,9 +1,17 @@
-import React from 'react'
+import React from 'react';
+import Popup from './Popup';
+import { useState } from 'react';
 
 const tokenImg = undefined;
 
+const handleClick = () => {
+    console.log('clicked worked yo');
+}
+
 
 const NFTCard = ({ nft }) => {
+
+    const [buttonPopup, setButtonPopup] = useState(false);
 
     const tokenImg = `https://ipfs.io/ipfs/${nft.token.metadata.displayUri?.split("ipfs://")[1]}`
 
@@ -11,7 +19,12 @@ const NFTCard = ({ nft }) => {
 
     return (
         <div className='card nft-card'>
-            <img src={tokenImg} className='nft-image' />
+            <img onClick={() => setButtonPopup(true)} src={tokenImg} className='nft-image' />
+
+            <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+                <h3>My Popup</h3>
+            </Popup>
+            
             {/* <div className='card content-item'>
                 NFT Name:
             </div> */}
